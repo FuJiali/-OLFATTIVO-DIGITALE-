@@ -31,9 +31,8 @@ void loop() {
 
   delay(60000); 
   }
-  // make a string for assembling the data to log:
+  
   String dataString = "";
-  // read three sensors and append to the string:
     int analogPin = A0; {
     int sensor = analogRead(analogPin);
     dataString += 1024-analogRead(A0);{
