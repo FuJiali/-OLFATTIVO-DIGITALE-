@@ -1,17 +1,16 @@
 #include <SPI.h>
 #include <SD.h>
-int val=0;
 const int chipSelect = 4;
+const int analogPin = A0;
+const int time = 60000; //Time to wait in milliseconds
 
 void setup() 
 {
- 
   // Open serial communications and wait for port to open:
   Serial.begin(9600);
   while (!Serial) {
     ; // wait for serial port to connect. Needed for native USB port only
   }
-
   Serial.print("Initializing SD card...");
 
   // see if the card is present and can be initialized:
@@ -24,20 +23,10 @@ void setup()
 }
 
 void loop() {
-   {
-
-  val=1024-analogRead(A0);
-
-  delay(60000); 
-  }
-  
   String dataString = "";
-    int analogPin = A0; {
-    int sensor = analogRead(analogPin);
-    dataString += 1024-analogRead(A0);{
-    dataString += " ";
-    }
-  }
+  int sensor = analogRead(analogPin);
+  dataString += 1024 - sensor;
+  dataString += " ";
   // open the file. note that only one file can be open at a time,
   // so you have to close this one before opening another.
   File dataFile = SD.open("datalog.txt", FILE_WRITE);
@@ -53,4 +42,5 @@ void loop() {
   else {
     Serial.println("error opening datalog.txt");
   }
+  delay(time);
 }
